@@ -61,7 +61,7 @@ function About(props) {
               <tr>
                 <th>Frontend Techs</th>
                 <th>Backend Techs</th>
-                <th>Other Knowledges</th>
+                <th>Other Knowledge</th>
               </tr>
             </thead>
             <tbody>
