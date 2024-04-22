@@ -22,7 +22,7 @@ function Header(props) {
   };
   return (
     <>
-      <Navbar bg="primary" data-bs-theme="dark">
+      <Navbar bg="primary" data-bs-theme="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand style={{ fontWeight: "bold" }}>PEDRO MAS</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
