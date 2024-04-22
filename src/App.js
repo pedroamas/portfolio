@@ -15,7 +15,7 @@ import I18n from "./i18n";
 
 function App() {
   return (
-    <HashRouter>
+    <HashRouter basename="/portfolio">
       <Header />
       <Routes>
         <Route path="/" exact element={<AboutMe />} />
