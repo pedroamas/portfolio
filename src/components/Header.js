@@ -28,11 +28,15 @@ function Header(props) {
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-              <Nav.Link href="/#/">{t("About me")}</Nav.Link>
-              <Nav.Link href="/#/todolist">{t("To-do list")}</Nav.Link>
-              <Nav.Link href="/#/chess">{t("Chess")}</Nav.Link>
-              <Nav.Link href="/#/minesweeper">{t("Minesweeper")}</Nav.Link>
-              <Nav.Link href="/#/snake">{t("Snake")}</Nav.Link>
+              <Nav.Link href="/portfolio/#/">{t("About me")}</Nav.Link>
+              <Nav.Link href="/portfolio/#/todolist">
+                {t("To-do list")}
+              </Nav.Link>
+              <Nav.Link href="/portfolio/#/chess">{t("Chess")}</Nav.Link>
+              <Nav.Link href="/portfolio/#/minesweeper">
+                {t("Minesweeper")}
+              </Nav.Link>
+              <Nav.Link href="/portfolio/#/snake">{t("Snake")}</Nav.Link>
             </Nav>
             <ButtonGroup>
               <ToggleButton
