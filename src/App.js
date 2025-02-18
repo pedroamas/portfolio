@@ -12,28 +12,35 @@ import Header from "./components/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/Footer";
 import I18n from "./i18n";
+import Cocina from "./pages/Cocina";
 
 function App() {
   return (
-    <HashRouter>
-      <Header />
-      <Routes>
-        <Route path="/" exact element={<AboutMe />} />
-        <Route path="/minesweeper" element={<Minesweeper />} />
-        <Route path="/snake" element={<Snake />} />
-        <Route path="/chess" element={<Chess />} />
-        <Route path="/todolist" element={<Home />} />
-        {/* 
-       
-        <Route exact path="/streaming" component={Streaming} />
-        
-        <Route exact path="/freecell" component={FreeCell} />
-        <Route path="/player/:id" component={Player} /> */}
-      </Routes>
-      <div className="push"></div>
-      <Footer />
-    </HashRouter>
+    <p>
+   Hola
+      </p>
   );
 }
 
 export default App;
+
+
+//  {/* <HashRouter>
+//       <Header />
+//       <Routes>
+//         <Route path="/" exact element={<AboutMe />} />
+//         <Route path="/minesweeper" element={<Minesweeper />} />
+//         <Route path="/snake" element={<Snake />} />
+//         <Route path="/cocina" element={<Cocina />} />
+//         <Route path="/chess" element={<Chess />} />
+//         <Route path="/todolist" element={<Home />} />
+//         {/* 
+       
+//         <Route exact path="/streaming" component={Streaming} />
+        
+//         <Route exact path="/freecell" component={FreeCell} />
+//         <Route path="/player/:id" component={Player} /> */}
+//         </Routes>
+//         <div className="push"></div>
+//         <Footer />
+//         </HashRouter> */}

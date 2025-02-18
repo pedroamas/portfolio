@@ -36,6 +36,9 @@ function Header(props) {
               <Nav.Link href="/portfolio/#/minesweeper">
                 {t("Minesweeper")}
               </Nav.Link>
+              <Nav.Link href="/portfolio/#/cocina">
+                {t("Cocina")}
+              </Nav.Link>
               <Nav.Link href="/portfolio/#/snake">{t("Snake")}</Nav.Link>
             </Nav>
             <ButtonGroup>
