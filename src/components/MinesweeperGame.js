@@ -10,6 +10,7 @@ import {
   Modal,
   Image,
 } from "react-bootstrap";
+import win from '../images/win.png'
 
 var minesweeper;
 var isNew;
@@ -46,7 +47,7 @@ function MinesweeperGame(props) {
           <Modal.Title>You win!</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          <Image className="image" src="images/win.png" fluid />
+          <Image className="image" src={win} fluid />
         </Modal.Body>
       </Modal>
       <Form>

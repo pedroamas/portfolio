@@ -121,7 +121,7 @@ function SnakeGame(props) {
 
   function isIniBox(i, j) {
     if (i == 0 && j == 0)
-      return <img src="images/snakeHead.png" className="snakeImg" />;
+      return <img src="/portfolio/images/snakeHead.png" className="snakeImg" />;
     return;
   }
   function newGame(e) {
@@ -149,7 +149,7 @@ function SnakeGame(props) {
     snakeHead = 0;
     eatenFruits = 0;
     $("#0-0").prepend(
-      $("<img>", { src: "images/snakeHead.png", class: "snakeImg right" })
+      $("<img>", { src: "/portfolio/images/snakeHead.png", class: "snakeImg right" })
     );
     calculateNewFruit();
 
@@ -182,7 +182,7 @@ function SnakeGame(props) {
           if (!eat(headBox.i + 1, headBox.j)) tailControl();
           else addTailImg();
           $(idBox).prepend(
-            $("<img>", { src: "images/snakeHead.png", class: "snakeImg down" })
+            $("<img>", { src: "/portfolio/images/snakeHead.png", class: "snakeImg down" })
           );
           transformateHeadToBody(direction);
           lastDirection = direction;
@@ -197,7 +197,7 @@ function SnakeGame(props) {
           if (!eat(headBox.i, headBox.j + 1)) tailControl();
           else addTailImg();
           $(idBox).prepend(
-            $("<img>", { src: "images/snakeHead.png", class: "snakeImg right" })
+            $("<img>", { src: "/portfolio/images/snakeHead.png", class: "snakeImg right" })
           );
           transformateHeadToBody(direction);
           lastDirection = direction;
@@ -214,7 +214,7 @@ function SnakeGame(props) {
           if (!eat(headBox.i - 1, headBox.j)) tailControl();
           else addTailImg();
           $(idBox).prepend(
-            $("<img>", { src: "images/snakeHead.png", class: "snakeImg up" })
+            $("<img>", { src: "/portfolio/images/snakeHead.png", class: "snakeImg up" })
           );
           transformateHeadToBody(direction);
           lastDirection = direction;
@@ -230,7 +230,7 @@ function SnakeGame(props) {
           if (!eat(headBox.i, headBox.j - 1)) tailControl();
           else addTailImg();
           $(idBox).prepend(
-            $("<img>", { src: "images/snakeHead.png", class: "snakeImg left" })
+            $("<img>", { src: "/portfolio/images/snakeHead.png", class: "snakeImg left" })
           );
           transformateHeadToBody(direction);
           lastDirection = direction;
@@ -249,7 +249,7 @@ function SnakeGame(props) {
         $(idBox).empty();
         $(idBox).prepend(
           $("<img>", {
-            src: "images/snakeBody.png",
+            src: "/portfolio/images/snakeBody.png",
             class: "snakeImg " + orientation,
           })
         );
@@ -264,7 +264,7 @@ function SnakeGame(props) {
         $(idBox).empty();
         $(idBox).prepend(
           $("<img>", {
-            src: "images/snakeCorner.png",
+            src: "/portfolio/images/snakeCorner.png",
             class:
               "snakeImg " +
               snake[snake.length - 2].orientation +
@@ -283,7 +283,7 @@ function SnakeGame(props) {
         $(idBox).empty();
         $(idBox).prepend(
           $("<img>", {
-            src: "images/snakeCornerInvert.png",
+            src: "/portfolio/images/snakeCornerInvert.png",
             class:
               "snakeImg " +
               snake[snake.length - 2].orientation +
@@ -314,7 +314,7 @@ function SnakeGame(props) {
     $(idBox).empty();
     $(idBox).prepend(
       $("<img>", {
-        src: "images/snakeTail.png",
+        src: "/portfolio/images/snakeTail.png",
         class: "snakeImg " + snake[1].orientation,
       })
     );
@@ -345,7 +345,7 @@ function SnakeGame(props) {
     }
     idBox = "#" + fruit_i + "-" + fruit_j;
     $(idBox).prepend(
-      $("<img>", { src: "images/fruit.png", class: "snakeImg" })
+      $("<img>", { src: "/portfolio/images/fruit.png", class: "snakeImg" })
     );
     fruit = { i: fruit_i, j: fruit_j };
   }

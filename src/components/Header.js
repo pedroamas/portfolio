@@ -11,7 +11,8 @@ import {
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useTranslation } from "react-i18next";
-
+import united from '../images/united-states.png'
+import spain from "../images/spain.png"
 function Header(props) {
   const { t, i18n } = useTranslation();
 
@@ -36,9 +37,7 @@ function Header(props) {
               <Nav.Link href="/portfolio/#/minesweeper">
                 {t("Minesweeper")}
               </Nav.Link>
-              <Nav.Link href="/portfolio/#/cocina">
-                {t("Cocina")}
-              </Nav.Link>
+              
               <Nav.Link href="/portfolio/#/snake">{t("Snake")}</Nav.Link>
             </Nav>
             <ButtonGroup>
@@ -50,7 +49,7 @@ function Header(props) {
                 value={"en"}
                 onChange={(e) => changeLanguage("en")}
               >
-                <Image className="icon" src="images/united-states.png" />
+                <Image className="icon" src={united} />
               </ToggleButton>
               <ToggleButton
                 id={`radio-2`}
@@ -60,7 +59,7 @@ function Header(props) {
                 value={"en"}
                 onChange={(e) => changeLanguage("es")}
               >
-                <Image className="icon" src="images/spain.png" />
+                <Image className="icon" src={spain} />
               </ToggleButton>
             </ButtonGroup>
           </Navbar.Collapse>

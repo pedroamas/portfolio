@@ -2,7 +2,24 @@ import React from "react";
 import { Row, Col, Image, NavLink, Table } from "react-bootstrap";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useTranslation } from "react-i18next";
-
+import BootstrapImg from '../images/btrapIcon.png'
+import mongoIcon from '../images/mongoIcon.png'
+import aboutme from '../images/aboutme.gif'
+import responsive from '../images/responsive.gif'
+import ReactIcon from '../images/React-icon.svg.png'
+import javaIcon from '../images/javaIcon.png'
+import scrumIcon from '../images/scrumIcon.png';
+import angularIcon from '../images/angularIcon.svg';
+import nodeIcon from '../images/nodeIcon.png';
+import awsIcon from '../images/awsIcon.png';
+import htmlIcon from '../images/htmlIcon.png';
+import tsIcon from '../images/tsIcon.png';
+import msIcon from '../images/msIcon.jpg';
+import cssIcon from '../images/cssIcon.png';
+import phpIcon from '../images/phpIcon.png';
+import dockerIcon from '../images/dockerIcon.png';
+import jsIcon from '../images/jsIcon.jpg';
+import mysqlIcon from '../images/mysqlIcon.png';
 function About(props) {
   const { t } = useTranslation();
   return (
@@ -26,7 +43,7 @@ function About(props) {
               </Col>
               <Col md={4} className="order-md-1">
                 <p>
-                  <Image className="image" src="images/aboutme.gif" fluid />
+                  <Image className="image" src={aboutme} fluid />
                 </p>
               </Col>
             </Row>
@@ -40,7 +57,7 @@ function About(props) {
               </Col>
               <Col md={4} className="order-md-2">
                 <p>
-                  <Image className="image" src="images/responsive.gif" fluid />
+                  <Image className="image" src={responsive} fluid />
                 </p>
               </Col>
             </Row>
@@ -70,7 +87,7 @@ function About(props) {
                   <Row>
                     <Col>React</Col>
                     <Col>
-                      <Image className="icon" src="images/React-icon.svg.png" />
+                      <Image className="icon" src={ ReactIcon}/>
                     </Col>
                   </Row>
                 </td>
@@ -78,7 +95,7 @@ function About(props) {
                   <Row>
                     <Col>Java</Col>
                     <Col>
-                      <Image className="icon" src="images/javaIcon.png" />
+                      <Image className="icon" src={javaIcon} />
                     </Col>
                   </Row>
                 </td>
@@ -86,7 +103,7 @@ function About(props) {
                   <Row>
                     <Col>Scrum Methodology</Col>
                     <Col>
-                      <Image className="icon" src="images/scrumIcon.png" />
+                      <Image className="icon" src={scrumIcon} />
                     </Col>
                   </Row>
                 </td>
@@ -96,7 +113,7 @@ function About(props) {
                   <Row>
                     <Col>Angular</Col>
                     <Col>
-                      <Image className="icon" src="images/angularIcon.svg" />
+                      <Image className="icon" src={angularIcon} />
                     </Col>
                   </Row>
                 </td>
@@ -104,7 +121,7 @@ function About(props) {
                   <Row>
                     <Col>Node js</Col>
                     <Col>
-                      <Image className="icon" src="images/nodeIcon.png" />
+                      <Image className="icon" src={nodeIcon} />
                     </Col>
                   </Row>
                 </td>
@@ -112,7 +129,7 @@ function About(props) {
                   <Row>
                     <Col>AWS</Col>
                     <Col>
-                      <Image className="icon" src="images/awsIcon.png" />
+                      <Image className="icon" src={awsIcon} />
                     </Col>
                   </Row>
                 </td>
@@ -122,7 +139,7 @@ function About(props) {
                   <Row>
                     <Col>HTML</Col>
                     <Col>
-                      <Image className="icon" src="images/htmlIcon.png" />
+                      <Image className="icon" src={htmlIcon} />
                     </Col>
                   </Row>
                 </td>
@@ -130,7 +147,7 @@ function About(props) {
                   <Row>
                     <Col>Typescript</Col>
                     <Col>
-                      <Image className="icon" src="images/tsIcon.png" />
+                      <Image className="icon" src={tsIcon} />
                     </Col>
                   </Row>
                 </td>
@@ -138,7 +155,7 @@ function About(props) {
                   <Row>
                     <Col>Microservices</Col>
                     <Col>
-                      <Image className="icon" src="images/msIcon.jpg" />
+                      <Image className="icon" src={msIcon} />
                     </Col>
                   </Row>
                 </td>
@@ -148,7 +165,7 @@ function About(props) {
                   <Row>
                     <Col>CSS</Col>
                     <Col>
-                      <Image className="icon" src="images/cssIcon.png" />
+                      <Image className="icon" src={cssIcon} />
                     </Col>
                   </Row>
                 </td>
@@ -156,7 +173,7 @@ function About(props) {
                   <Row>
                     <Col>PHP</Col>
                     <Col>
-                      <Image className="icon" src="images/phpIcon.png" />
+                      <Image className="icon" src={phpIcon} />
                     </Col>
                   </Row>
                 </td>
@@ -164,7 +181,7 @@ function About(props) {
                   <Row>
                     <Col>Docker</Col>
                     <Col>
-                      <Image className="icon" src="images/dockerIcon.png" />
+                      <Image className="icon" src={dockerIcon} />
                     </Col>
                   </Row>
                 </td>
@@ -174,7 +191,7 @@ function About(props) {
                   <Row>
                     <Col>Javascript</Col>
                     <Col>
-                      <Image className="icon" src="images/jsIcon.jpg" />
+                      <Image className="icon" src={jsIcon} />
                     </Col>
                   </Row>
                 </td>
@@ -182,7 +199,7 @@ function About(props) {
                   <Row>
                     <Col>MySQL</Col>
                     <Col>
-                      <Image className="icon" src="images/mysqlIcon.png" />
+                      <Image className="icon" src={mysqlIcon}/>
                     </Col>
                   </Row>
                 </td>
@@ -193,7 +210,7 @@ function About(props) {
                   <Row>
                     <Col>Bootstrap</Col>
                     <Col>
-                      <Image className="icon" src="images/btrapIcon.png" />
+                      <Image className="icon" src={BootstrapImg} />
                     </Col>
                   </Row>
                 </td>
@@ -201,7 +218,7 @@ function About(props) {
                   <Row>
                     <Col>MongoDB</Col>
                     <Col>
-                      <Image className="icon" src="images/mongoIcon.png" />
+                      <Image className="icon" src={mongoIcon} />
                     </Col>
                   </Row>
                 </td>
@@ -216,84 +233,3 @@ function About(props) {
 }
 
 export default About;
-
-/*
-import React from "react";
-import { Row, Col, Image, Container } from "react-bootstrap";
-
-function About(props) {
-  return (
-    <>
-      <div className="container  separe-margin">
-        <div className="separe-margin">
-          <h2 className="separe-margin">About me</h2>
-
-          <div
-            style={{
-              paddingTop: "10px",
-            }}
-          >
-            <p>
-              Hello! I'm Pedro Mas, a passionate fullstack developer with seven
-              years of experience in the technology industry. I graduated in
-              Computer Science with a strong belief that innovation and
-              creativity are the driving forces of progress in our field.
-              <br />
-              Throughout my professional career, I've had the privilege of
-              working on a variety of challenging projects that have allowed me
-              to develop my technical skills and my ability to efficiently solve
-              problems. My focus is on creating robust and scalable software
-              solutions that meet the needs of end-users.
-              <br />
-              My experience spans from developing web and mobile applications to
-              implementing complex database systems and optimizing performance.
-              Additionally, I am passionate about staying up-to-date with the
-              latest trends and emerging technologies in the world of software
-              development.
-              <br />
-              As a committed professional, I strive to effectively collaborate
-              with multidisciplinary teams, communicating ideas clearly and
-              contributing to the collective success of the project. I firmly
-              believe in continuous learning and constant improvement, always
-              seeking new opportunities for personal and professional growth.
-              <br />I am excited about future opportunities that allow me to
-              continue growing and contributing to the exciting world of
-              technology. If you're interested in learning more about my work or
-              exploring potential collaborations, feel free to get in touch!
-            </p>
-          </div>
-          <div
-            style={{
-              textAlign: "center",
-              paddingTop: "10px",
-            }}
-          >
-            <Image className="image" src="images/aboutme.gif" fluid />
-          </div>
-
-          <Row className="centered">
-            <Col xs={6} md={6}>
-              <Image className="image" src="images/mongo.png" fluid />
-            </Col>
-
-            <Col xs={6} md={6}>
-              <Image className="image" src="images/node.png" fluid />
-            </Col>
-          </Row>
-          <Row className="centered">
-            <Col xs={6} md={6}>
-              <Image className="image" src="images/bootstrap.png" fluid />
-            </Col>
-            <Col xs={6} md={6}>
-              <Image className="image" src="images/react.jpg" fluid />
-            </Col>
-          </Row>
-        </div>
-      </div>
-    </>
-  );
-}
-
-export default About;
-
-*/

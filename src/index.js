@@ -6,10 +6,10 @@ import reportWebVitals from "./reportWebVitals";
 import { Amplify } from "aws-amplify";
 import config from "./aws-exports.js";
 
-// const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-// Amplify.configure(config);
-// root.render(<App />);
+Amplify.configure(config);
+root.render(<App />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

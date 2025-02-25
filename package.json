@@ -12,7 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "aws-amplify": "^6.0.28",
     "bootstrap": "^5.3.3",
-    "chess.js": "^0.12.0",
+    "chess.js": "^0.12.1",
     "chessboardjsx": "^2.4.7",
     "dexie": "^4.0.4",
     "gh-pages": "^6.1.1",
@@ -26,6 +26,7 @@
     "react-router": "^6.22.3",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
+    "socket.io-client": "^4.8.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

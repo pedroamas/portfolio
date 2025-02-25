@@ -1,377 +1,43 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notificaciones en Tiempo Real</title>
-
-    <!-- 📌 Bootstrap CDN -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
     />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
 
-    <!-- 📌 Socket.IO -->
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
   </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
 
-  <body class="container mt-4">
-    <h1 class="text-center mb-4">Pedidos en Tiempo Real</h1>
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
 
-    <!-- 📌 Botones de acciones -->
-    <div class="text-center">
-      <button id="btnNuevoPlato" class="btn btn-primary">
-        🚀 Solicitar Nuevo Plato
-      </button>
-      <button id="btnPedir100Platos" class="btn btn-warning" disabled>
-        💥 Pedir 100 Platos *
-      </button>
-      <button id="btnPedir400Platos" class="btn btn-danger" disabled>
-        🔥 Pedir 400 Platos *
-      </button>
-    </div>
-    <p>*: Disponible en localhost ya que el servicio de google es pago</p>
-
-    <!-- 📌 Tabla de Pedidos -->
-    <div class="container mt-4">
-      <div class="row">
-        <!-- 📌 Tabla de Estado de Pedidos -->
-        <div class="col-md-6">
-          <h3>📌 Estado de Pedidos</h3>
-          <table class="table table-bordered">
-            <thead class="table-dark">
-              <tr>
-                <th>Pedidos</th>
-                <th>En Cocina</th>
-                <th>Finalizados</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr id="tablaPedidos">
-                <td id="pedidos">-</td>
-                <td id="enCocina">-</td>
-                <td id="finalizados">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- 📌 Tabla de Últimos Platos (con scroll) -->
-        <div class="col-md-6">
-          <h3>🍽️ Últimos Platos</h3>
-          <div style="max-height: 400px; overflow-y: auto">
-            <!-- SCROLL -->
-            <table class="table table-striped">
-              <thead class="table-dark">
-                <tr>
-                  <th>Nombre</th>
-                  <th>Fecha en Cocina</th>
-                  <th>Finalizado</th>
-                </tr>
-              </thead>
-              <tbody id="tabla-platos">
-                <!-- Los datos se llenarán dinámicamente -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container mt-4">
-      <div class="row">
-        <!-- 📌 Tabla de Últimas Compras -->
-        <div class="col-md-6">
-          <h3>Últimas Compras</h3>
-          <div style="max-height: 400px; overflow-y: auto">
-            <!-- SCROLL -->
-            <table class="table table-striped">
-              <thead class="table-dark">
-                <tr>
-                  <th>Nombre</th>
-                  <th>Cantidad Vendida</th>
-                  <th>Fecha</th>
-                </tr>
-              </thead>
-              <tbody id="tabla-compras">
-                <!-- Las compras aparecerán aquí dinámicamente -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- 📌 Tabla de Ingredientes -->
-        <div class="col-md-6">
-          <h3>🛒 Ingredientes en Uso</h3>
-          <table class="table table-bordered">
-            <thead class="table-dark">
-              <tr>
-                <th>Ingrediente</th>
-                <th>Cantidad</th>
-              </tr>
-            </thead>
-            <tbody id="tablaIngredientes">
-              <!-- Se llenará dinámicamente -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- 📌 Lista de pedidos -->
-    <ul id="pedidos" class="list-group mt-4"></ul>
-
-    <h3 class="text-center">🍽️ Lista de Platos</h3>
-    <ul id="listaPlatos" class="list-group mt-4"></ul>
-
-    <script>
-      // const serverURL = "http://localhost:3010";
-      const serverURL = "https://alegra-679014142115.us-central1.run.app";
-      // const socket = io("http://localhost:3010");
-      const socket = io(serverURL);
-
-      const tablaCompras = document.getElementById("tabla-compras");
-
-      function formatoFecha(fechaISO) {
-        if (!fechaISO) return "";
-        const fecha = new Date(fechaISO);
-        return fecha.toLocaleString("es-ES", {
-          timeZone: "America/Argentina/Buenos_Aires", // Ajusta según tu zona horaria
-        });
-      }
-
-      socket.on("compras", (compra) => {
-        const fila = document.createElement("tr");
-        fila.innerHTML = `
-                <td>${compra.ingrediente}</td>
-                <td>${compra.quantitySold}</td>
-                <td>${formatoFecha(compra.createdAt)}</td>
-            `;
-        tablaCompras.prepend(fila); // Agregar nuevas compras al inicio
-      });
-
-      socket.on("platos", (platos) => {
-        llenarTablaPlatos(platos);
-      });
-
-      socket.on("ingredientes", (ingredientes) => {
-        actualizarVistaIngredientes(ingredientes);
-      });
-
-      async function actualizarMonitoreoCompras() {
-        try {
-          const response = await fetch(serverURL + "/monitoreo-compras");
-          const compras = await response.json();
-          for (const c of compras) {
-            const fila = document.createElement("tr");
-            fila.innerHTML = `
-                    <td>${c.ingrediente}</td>
-                    <td>${c.quantitySold}</td>
-                    <td>${formatoFecha(c.createdAt)}</td>
-                `;
-            tablaCompras.append(fila);
-          }
-        } catch (error) {
-          console.error("❌ Error al obtener monitoreo:", error);
-        }
-      }
-
-      function llenarTablaPlatos(data) {
-        const platos = data.platos;
-        actualizarVista(data);
-
-        const tablaPlatos = document.getElementById("tabla-platos");
-        tablaPlatos.innerHTML = "";
-
-        platos.forEach((plato) => {
-          const fila = document.createElement("tr");
-          fila.innerHTML = `
-              <td>${plato.receta}</td>
-              <td>${formatoFecha(plato.recibidoCocina)}</td>
-              <td>${formatoFecha(plato.finalizado)}</td>
-            `;
-          tablaPlatos.appendChild(fila);
-        });
-      }
-      async function cargarMonitoreo() {
-        try {
-          const response = await fetch(serverURL + "/monitoreo-platos");
-          const data = await response.json();
-          llenarTablaPlatos(data);
-        } catch (error) {
-          console.error("Error al obtener los datos:", error);
-        }
-      }
-      cargarMonitoreo();
-
-      // async function actualizarMonitoreo() {
-      //   try {
-      //     const response = await fetch("http://localhost:3010/monitoreo");
-      //     const data = await response.json();
-      //     // actualizarVista(data);
-      //   } catch (error) {
-      //     console.error("❌ Error al obtener monitoreo:", error);
-      //   }
-      // }
-
-      async function actualizarMonitoreoIngredientes() {
-        try {
-          const response = await fetch(serverURL + "/monitoreo-ingredientes");
-          const data = await response.json();
-          actualizarVistaIngredientes(data);
-        } catch (error) {
-          console.error("❌ Error al obtener monitoreo:", error);
-        }
-      }
-      actualizarMonitoreoIngredientes();
-
-      function actualizarVista(data) {
-        // 📌 Actualizar tabla de pedidos
-        document.getElementById("pedidos").textContent = data.pedidos;
-        document.getElementById("enCocina").textContent = data.enCocina;
-        document.getElementById("finalizados").textContent = data.finalizados;
-      }
-
-      function actualizarVistaIngredientes(data) {
-        console.log("llega data");
-        console.log("actualiza ingredientes", data);
-
-        const ingredientesTabla = document.getElementById("tablaIngredientes");
-        ingredientesTabla.innerHTML = "";
-        data.forEach((ingrediente) => {
-          const row = `<tr>
-                        <td>${ingrediente.nombre}</td>
-                        <td>${ingrediente.cantidad}</td>
-                    </tr>`;
-          ingredientesTabla.innerHTML += row;
-        });
-      }
-
-      // 📌 Cargar datos iniciales con fetch
-      // actualizarMonitoreo();
-      actualizarMonitoreoCompras();
-      // 📌 Escuchar actualizaciones desde WebSocket
-      // socket.on("estadisticas", (data) => {
-      //   actualizarVista(data);
-      // });
-
-      // 📌 Función para solicitar un plato
-      async function solicitarPlato() {
-        try {
-          const response = await fetch(serverURL + "/nuevoPlato", {
-            method: "GET",
-          });
-          const data = await response.json();
-        } catch (error) {
-          console.error("❌ Error al solicitar el plato:", error);
-        }
-      }
-
-      // 📌 Botón para solicitar un solo plato
-      document
-        .getElementById("btnNuevoPlato")
-        .addEventListener("click", async () => {
-          const boton = document.getElementById("btnNuevoPlato");
-          boton.disabled = true;
-          boton.textContent = "⏳ Solicitando...";
-          await solicitarPlato();
-          boton.disabled = false;
-          boton.textContent = "🚀 Solicitar Nuevo Plato";
-        });
-
-      // 📌 Botón para solicitar 100 platos
-      document
-        .getElementById("btnPedir100Platos")
-        .addEventListener("click", async () => {
-          const boton = document.getElementById("btnPedir100Platos");
-          boton.disabled = true;
-          boton.textContent = "💥 Enviando 100 pedidos...";
-
-          for (let i = 0; i < 100; i++) {
-            await solicitarPlato();
-          }
-
-          boton.disabled = false;
-          boton.textContent = "💥 Pedir 100 Platos";
-        });
-      document
-        .getElementById("btnPedir400Platos")
-        .addEventListener("click", async () => {
-          const boton = document.getElementById("btnPedir400Platos");
-          boton.disabled = true;
-          boton.textContent = "🔥 Enviando 400 pedidos...";
-
-          for (let i = 0; i < 400; i++) {
-            await solicitarPlato();
-          }
-
-          boton.disabled = false;
-          boton.textContent = "🔥 Pedir 400 Platos";
-        });
-      const RECIPES = {
-        polloConEnsalada: {
-          name: "Pollo con ensalada",
-          ingredients: [
-            { name: "chicken", count: 1 },
-            { name: "lemon", count: 1 },
-            { name: "lettuce", count: 1 },
-            { name: "tomato", count: 2 },
-          ],
-        },
-        carneConPapasFritas: {
-          name: "Carne con puré",
-          ingredients: [
-            { name: "meat", count: 1 },
-            { name: "potato", count: 2 },
-          ],
-        },
-        ensalada: {
-          name: "Ensalada",
-          ingredients: [
-            { name: "onion", count: 1 },
-            { name: "cheese", count: 2 },
-            { name: "lettuce", count: 1 },
-            { name: "tomato", count: 2 },
-          ],
-        },
-        arrozConPollo: {
-          name: "Arroz con pollo",
-          ingredients: [
-            { name: "rice", count: 1 },
-            { name: "chicken", count: 2 },
-            { name: "ketchup", count: 1 },
-          ],
-        },
-        arrozConQueso: {
-          name: "Arroz con queso",
-          ingredients: [
-            { name: "rice", count: 1 },
-            { name: "cheese", count: 2 },
-            { name: "lemon", count: 2 },
-          ],
-        },
-        tortillaDePapas: {
-          name: "Tortilla de papas",
-          ingredients: [
-            { name: "potato", count: 3 },
-            { name: "ketchup", count: 1 },
-            { name: "onion", count: 2 },
-          ],
-        },
-      };
-
-      const listaPlatos = document.getElementById("listaPlatos");
-
-      for (const key in RECIPES) {
-        const plato = RECIPES[key];
-        const item = document.createElement("li");
-        item.classList.add("list-group-item");
-        item.innerHTML = `<strong>${plato.name}</strong><br>
-                              🥕 Ingredientes: ${plato.ingredients
-                                .map((i) => `${i.name} (${i.count})`)
-                                .join(", ")}`;
-        listaPlatos.appendChild(item);
-      }
-    </script>
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
   </body>
 </html>
