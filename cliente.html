@@ -140,7 +140,11 @@
         });
       }
 
+      socket.on("mensajePrueba", (mensajePrueba) => {
+        console.log(mensajePrueba);
+      });
       socket.on("compras", (compra) => {
+        console.log("nueva compra");
         const fila = document.createElement("tr");
         fila.innerHTML = `
                 <td>${compra.ingrediente}</td>
@@ -151,10 +155,12 @@
       });
 
       socket.on("platos", (platos) => {
+        console.log("nueva platos");
         llenarTablaPlatos(platos);
       });
 
       socket.on("ingredientes", (ingredientes) => {
+        console.log("nueva ingredientes");
         actualizarVistaIngredientes(ingredientes);
       });
 
@@ -233,9 +239,6 @@
       }
 
       function actualizarVistaIngredientes(data) {
-        console.log("llega data");
-        console.log("actualiza ingredientes", data);
-
         const ingredientesTabla = document.getElementById("tablaIngredientes");
         ingredientesTabla.innerHTML = "";
         data.forEach((ingrediente) => {
